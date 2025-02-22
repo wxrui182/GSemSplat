@@ -40,10 +40,9 @@ class OpenCLIPNetwork:
 
     @torch.no_grad()
     def get_relevancy(self, embed: torch.Tensor, positive_id: int) -> torch.Tensor:
-        # embed: 32768x512
         phrases_embeds = torch.cat([self.pos_embeds, self.neg_embeds], dim=0)
         p = phrases_embeds.to(embed.dtype)
-        embed = embed / (embed.norm(dim=-1, keepdim=True) + 1e-6)   # 添加了归一化
+        embed = embed / (embed.norm(dim=-1, keepdim=True) + 1e-6)
         output = torch.mm(embed, p.T)
         positive_vals = output[..., positive_id : positive_id + 1]
         negative_vals = output[..., len(self.positives) :]
@@ -81,7 +80,6 @@ class OpenCLIPNetwork:
         self.semantic_embeds /= self.semantic_embeds.norm(dim=-1, keepdim=True)
     
     def get_semantic_map(self, sem_map: torch.Tensor) -> torch.Tensor:
-        # embed: 3xhxwx512
         n_levels, h, w, c = sem_map.shape
         pos_num = self.semantic_embeds.shape[0]
         phrases_embeds = torch.cat([self.semantic_embeds, self.neg_embeds], dim=0)

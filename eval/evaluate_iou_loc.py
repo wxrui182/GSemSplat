@@ -81,7 +81,7 @@ def eval_gt_loss_masks(json_folder: Union[str, Path] = None, ouput_path: Path = 
         for prompt_data in gt_data["objects"]:
             label = prompt_data['category']
             box = np.asarray(prompt_data['bbox']).reshape(-1)
-            mask = polygon_to_mask((gt_data['info']['height'], gt_data['info']['width']), prompt_data['segmentation'])     # 分割掩码
+            mask = polygon_to_mask((gt_data['info']['height'], gt_data['info']['width']), prompt_data['segmentation'])
             if img_ann[label].get('mask', None) is not None:
                 mask = stack_mask(img_ann[label]['mask'], mask)
                 img_ann[label]['bboxes'] = np.concatenate(
@@ -97,7 +97,7 @@ def eval_gt_loss_masks(json_folder: Union[str, Path] = None, ouput_path: Path = 
 
     return gt_ann, img_paths, render_img_paths, mask_paths
 
-def activate_stream_loss_masks(sem_map,    # 还原的语义图
+def activate_stream_loss_masks(sem_map,
                     image, 
                     clip_model, 
                     image_name: Path = None,
@@ -140,7 +140,7 @@ def activate_stream_loss_masks(sem_map,    # 还原的语义图
                 # valid_map_masked *= semantic_mask.squeeze(0)
                 valid_map_masked_all[i][k] = valid_map_masked
 
-            output_path_relev = image_name / 'heatmap' / f'{clip_model.positives[k]}_{i}'   # 保存激活图
+            output_path_relev = image_name / 'heatmap' / f'{clip_model.positives[k]}_{i}'
             output_path_relev.parent.mkdir(exist_ok=True, parents=True)
             colormap_saving(valid_map_masked.unsqueeze(-1), colormap_options, output_path_relev)
             
@@ -150,11 +150,11 @@ def activate_stream_loss_masks(sem_map,    # 还原的语义图
             valid_composited[mask, :] = image[mask, :] * 1.0
 
             if input_mask is not None:
-                valid_composited *= input_mask.unsqueeze(-1)  # 在保存组合图时应用 mask
+                valid_composited *= input_mask.unsqueeze(-1)
 
             output_path_compo = image_name / 'composited' / f'{clip_model.positives[k]}_{i}'
             output_path_compo.parent.mkdir(exist_ok=True, parents=True)
-            colormap_saving(valid_composited, colormap_options, output_path_compo)  # 保存合成图像
+            colormap_saving(valid_composited, colormap_options, output_path_compo)
             
             # truncate the heatmap into mask
             output = valid_map[i][k]
@@ -278,7 +278,7 @@ def evaluate_loss_masks(feat_dir, output_path, json_folder, mask_thresh, logger)
             render_rgb_img = torch.from_numpy(render_rgb_img).to(device)
 
             render_rgb_img_masked = render_rgb_img * mask_be_seen.unsqueeze(-1)
-            render_rgb_img_masked_np = render_rgb_img_masked.cpu().numpy()  # 转为 numpy
+            render_rgb_img_masked_np = render_rgb_img_masked.cpu().numpy()
             render_rgb_img_masked_np = (render_rgb_img_masked_np * 255).astype(np.uint8)
             cv2.imwrite(str(image_name / "masked_image.png"), render_rgb_img_masked_np[..., ::-1])
 
@@ -294,9 +294,8 @@ def evaluate_loss_masks(feat_dir, output_path, json_folder, mask_thresh, logger)
             intersection = img_ann_keys
         
         clip_model.set_positives(intersection)
-        # print('restored_feat:', restored_feat)
         c_iou_list, c_lvl = activate_stream_loss_masks(restored_feat, render_rgb_img, clip_model, image_name, img_ann,
-                                            thresh=mask_thresh, colormap_options=colormap_options, input_mask=mask_be_seen, semantic_mask=None)  # 激活图生成和IOU生成
+                                            thresh=mask_thresh, colormap_options=colormap_options, input_mask=mask_be_seen, semantic_mask=None)
         chosen_iou_all.extend(c_iou_list)
         chosen_lvl_list.extend(c_lvl)
 
