@@ -4,7 +4,7 @@ This is the code release for the paper **GSemSplat: Generalizable Semantic 3D Ga
 
 - Arxiv: https://arxiv.org/pdf/2412.16932
 
-![](C:\Users\v-xingrwang\Desktop\CVPR figures\Framework.png)
+![](https://github.com/wxrui182/GSemSplat/blob/main/figs/Framework.png)
 
 ## :sparkles:Abstract
 
