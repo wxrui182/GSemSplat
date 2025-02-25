@@ -4,13 +4,19 @@ This is the code release for the paper **GSemSplat: Generalizable Semantic 3D Ga
 
 - Arxiv: https://arxiv.org/pdf/2412.16932
 
-## :sparkles:To Do List
+![](C:\Users\v-xingrwang\Desktop\CVPR figures\Framework.png)
+
+## :sparkles:Abstract
+
+*Modeling and understanding the 3D world is crucial for various applications, from augmented reality to robotic navigation. Recent advancements based on 3D Gaussian Splatting have integrated semantic information from multi-view images into Gaussian primitives. However, these methods typically require costly per-scene optimization from dense calibrated images, limiting their practicality. In this paper, we consider the new task of generalizable 3D semantic field modeling from sparse, uncalibrated image pairs. Building upon the Splatt3R architecture, we introduce GSemSplat, a framework that learns open-vocabulary semantic representations linked to 3D Gaussians without the need for per-scene optimization, dense image collections or calibration. To ensure effective and reliable learning of semantic features in 3D space, we employ a dual-feature approach that leverages both region-specific and context-aware semantic features as supervision in the 2D space. This allows us to capitalize on their complementary strengths. Experimental results on the ScanNet++ dataset demonstrate the effectiveness and superiority of our approach compared to the traditional scene-specific method. We hope our work will inspire more research into generalizable 3D understanding.*
+
+## :bell:To Do List
 
 - [x] GSemSplat Test Results (Tab. 1)
 - [ ] Training and Inference Code
 - [ ] Complete Semantic Dataset
 
-## :sparkles: GSemSplat Test Results (Tab. 1)
+## :one: GSemSplat Test Results (Tab. 1)
 
 For environment setup, please refer to [LangSplat](https://github.com/minghanqin/LangSplat).
 
