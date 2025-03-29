@@ -1,0 +1,49 @@
+name: '%Y-%m-%d-%H-%M-%S'
+
+save_dir: './results/${name}/'
+
+# Environment
+seed: 0
+# devices: [0]
+devices: 'auto'
+
+# Loggers
+use_profiler: False
+loggers:
+  use_csv_logger: True
+  use_wandb: False
+
+# Model
+use_pretrained: True
+pretrained_mast3r_path: './checkpoints/MASt3R_ViTLarge_BaseDecoder_512_catmlpdpt_metric.pth'
+pretrained_splatt3r_path: './checkpoints/epoch=19-step=1200.ckpt'
+pretrained_splatt3r_language_path: './checkpoints/epoch=7-step=44600.ckpt'
+
+# Data
+data:
+  root: '/home/v-xingrwang/splatt3r_49dim/data/scannetpp'
+  # batch_size: 12
+  # batch_size: 1
+  # batch_size: 2
+  # num_workers: 8
+  batch_size: 4
+  num_workers: 4
+  resolution: [512, 512]
+  epochs_per_train_epoch: 100 # How many times to sample from each scene each training epoch (helps avoid unnecessary Pytorch Lightning overhead)
+
+# Optimization
+opt:
+  epochs: 20
+  lr: 0.00001
+  weight_decay: 0.05
+  gradient_clip_val: 0.5
+
+loss:
+  mse_loss_weight: 1.0
+  lpips_loss_weight: 0.25
+  mast3r_loss_weight: Null
+  apply_mask: True
+  average_over_mask: True
+
+use_offsets: True
+sh_degree: 1
