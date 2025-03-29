@@ -199,7 +199,7 @@ if __name__ == '__main__':
         )
         pca = PCA(n_components=3)
 
-        filelist = ["demo_examples/in_the_wild_27_img_1.jpg", "demo_examples/in_the_wild_2_img_2.jpg"]
+        filelist = ["demo_examples/in_the_wild_1_img_1.jpg", "demo_examples/in_the_wild_1_img_2.jpg"]
 
         imgs = load_images(filelist, size=image_size, verbose=not silent)
 
