@@ -4,7 +4,6 @@ save_dir: './results/${name}/'
 
 # Environment
 seed: 0
-# devices: [0]
 devices: 'auto'
 
 # Loggers
@@ -21,11 +20,7 @@ pretrained_splatt3r_language_path: './checkpoints/epoch=7-step=44600.ckpt'
 
 # Data
 data:
-  root: '/home/v-xingrwang/splatt3r_49dim/data/scannetpp'
-  # batch_size: 12
-  # batch_size: 1
-  # batch_size: 2
-  # num_workers: 8
+  root: 'path_to_data/data/scannetpp'
   batch_size: 4
   num_workers: 4
   resolution: [512, 512]
