@@ -50,3 +50,4 @@ cd GSemSplat/eval
 bash eval.sh
 ```
 
+## :two: Inference Demo (updating)
