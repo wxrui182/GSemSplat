@@ -51,3 +51,4 @@ bash eval.sh
 ```
 
 ## :two: Inference Demo (updating)
+The pre-trained model checkpoints can be downloaded from [this link](https://rec.ustc.edu.cn/share/d4689c70-137d-11f0-badd-bb93c350eb7f).
